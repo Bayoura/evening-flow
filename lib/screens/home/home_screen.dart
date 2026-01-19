@@ -1,5 +1,7 @@
+import 'package:evening_flow/buttons.dart';
 import 'package:evening_flow/constants/colors.dart';
 import 'package:evening_flow/constants/text_styles.dart';
+import 'package:evening_flow/widgets/routine_countdown.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -16,11 +18,15 @@ class _HomeScreenState extends State<HomeScreen> {
     "Beispielroutine 3",
   ];
   late String dropdownValue;
+  final startTime = const TimeOfDay(hour: 21, minute: 30);
+  String formattedTime = "";
 
   @override
   void initState() {
     super.initState();
     dropdownValue = dropdownList.first;
+    formattedTime =
+        "${startTime.hour < 10 ? "0${startTime.hour}" : startTime.hour}:${startTime.minute < 10 ? "0${startTime.minute}" : startTime.minute}";
   }
 
   @override
@@ -47,7 +53,6 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
           child: Column(
-            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
@@ -97,6 +102,24 @@ class _HomeScreenState extends State<HomeScreen> {
                     dropdownValue = value!;
                   });
                 },
+              ),
+              const SizedBox(height: 24),
+              Text("Beginn heute um $formattedTime Uhr"),
+              const SizedBox(height: 8),
+              RoutineCountdown(startTime: startTime),
+              const SizedBox(height: 40),
+              Center(
+                child: PrimaryButton(
+                  text: "Jetzt starten",
+                  onPressed: () {
+                    debugPrint("Jetzt starten wurde geklickt!");
+                  },
+                ),
+              ),
+              const SizedBox(height: 80),
+              Text(
+                "Schritte heute:",
+                style: Theme.of(context).textTheme.headlineSmall,
               ),
             ],
           ),
