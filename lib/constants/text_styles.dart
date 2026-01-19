@@ -17,25 +17,25 @@ class AppTextStyles {
   static const TextStyle h1 = TextStyle(
     fontFamily: _fontFamily,
     fontSize: 24,
-    fontWeight: FontWeight.w600, //semibold
+    fontWeight: FontWeight.w500, //medium
     color: AppColors.textPrimary,
     height: 1.33,
-    letterSpacing: -0.24,
+    letterSpacing: 0.24,
   );
 
   static const TextStyle h2 = TextStyle(
     fontFamily: _fontFamily,
-    fontSize: 20,
-    fontWeight: FontWeight.w600,
+    fontSize: 22,
+    fontWeight: FontWeight.w500, 
     color: AppColors.textPrimary,
     height: 1.4,
-    letterSpacing: -1,
+    letterSpacing: 0.2,
   );
 
   static const TextStyle h3 = TextStyle(
     fontFamily: _fontFamily,
     fontSize: 18,
-    fontWeight: FontWeight.w500, // Medium
+    fontWeight: FontWeight.w500, 
     color: AppColors.textPrimary,
     height: 1.33,
     letterSpacing: 0,
@@ -55,24 +55,24 @@ class AppTextStyles {
     fontSize: 14,
     fontWeight: FontWeight.w400,
     height: 1.4,
-    letterSpacing: 0.14,
+    letterSpacing: 0.2,
   );
 
   // Sections
   static const TextStyle section = TextStyle(
     fontFamily: _fontFamily,
     fontSize: 16,
-    fontWeight: FontWeight.w600,
+    fontWeight: FontWeight.w600, //semibold
     height: 1.5,
-    letterSpacing: 0.16,
+    letterSpacing: 0.4,
   );
 
   // Buttons
   static const TextStyle buttonPrimary = TextStyle(
     fontFamily: _fontFamily,
-    fontSize: 16,
-    fontWeight: FontWeight.w600,
-    letterSpacing: 0.16,
+    fontSize: 18,
+    fontWeight: FontWeight.w500,
+    letterSpacing: 0.4,
   );
 
   static const TextStyle buttonSecondary = TextStyle(
