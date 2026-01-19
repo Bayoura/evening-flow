@@ -1,4 +1,5 @@
 import 'package:evening_flow/constants/colors.dart';
+import 'package:evening_flow/constants/text_styles.dart';
 import 'package:evening_flow/theme/app_color_scheme.dart';
 import 'package:evening_flow/theme/app_text_theme.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,8 @@ class AppTheme {
       backgroundColor: AppColors.surfaceNavigation,
       foregroundColor: AppColors.textPrimary,
       centerTitle: false,
+      titleTextStyle: AppTextStyles.h1,
+      toolbarHeight: 64,
     ),
 
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
