@@ -48,6 +48,25 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: (value) {
+          debugPrint("You tapped $value");
+        },
+        items: [
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.home_outlined),
+            label: "Home".toUpperCase(),
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.checklist),
+            label: "Routinen".toUpperCase(),
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.emoji_emotions_outlined),
+            label: "Stimmung".toUpperCase(),
+          ),
+        ],
+      ),
       body: SizedBox(
         width: double.infinity,
         child: Padding(
