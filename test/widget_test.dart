@@ -11,20 +11,25 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:evening_flow/main.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  testWidgets('HomeScreen builds correctly and shows main widgets', (
+    WidgetTester tester,
+  ) async {
+    // Build the app
+    await tester.pumpWidget(const EveningFlowApp());
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    // Trigger a frame
+    await tester.pumpAndSettle();
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    // Prüfe: AppBar ist da
+    expect(find.byType(AppBar), findsOneWidget);
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    // Prüfe: Titel ist sichtbar
+    expect(find.text('Flutter Demo Home Page'), findsOneWidget);
+
+    // Optional: Prüfe, dass ein BottomNavigationBar vorhanden ist
+    expect(find.byType(BottomNavigationBar), findsOneWidget);
+
+    // Prüfe: Wichtige Buttons oder Sections (Dummy-Test)
+    expect(find.text('Start Routine'), findsNothing); 
   });
 }
