@@ -10,6 +10,7 @@ class RawColors {
   static const Color softApricot = Color(0xFFFFD796);
   static const Color mutedGreen = Color(0xFF9FB8A7);
   static const Color mutedLavender = Color(0xFFB3AEC7);
+  static const Color mediumRed = Color(0xFFFF7171);
 }
 
 class AppColors {
@@ -27,6 +28,7 @@ class AppColors {
   static const Color textSecondary = RawColors.lavenderGrey;
   static const Color textOnAccent = RawColors.deepIndigo;
   static const Color textAccent = RawColors.softApricot;
+  static const Color textError = RawColors.mediumRed;
 
   //Status
   static const Color statusCompleted = RawColors.mutedGreen;
