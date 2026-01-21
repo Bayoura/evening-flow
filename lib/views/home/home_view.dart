@@ -1,5 +1,6 @@
 import 'package:evening_flow/models/routine_model.dart';
 import 'package:evening_flow/viewmodels/home_viewmodel.dart';
+import 'package:evening_flow/views/active_routine/active_routine_view.dart';
 import 'package:evening_flow/widgets/buttons.dart';
 import 'package:evening_flow/constants/colors.dart';
 import 'package:evening_flow/constants/text_styles.dart';
@@ -94,13 +95,21 @@ class _HomeViewState extends State<HomeView> {
               const SizedBox(height: 24),
               Text(homeViewModel.startTimeLabel),
               const SizedBox(height: 8),
-              RoutineCountdown(startTime: homeViewModel.selectedRoutine.startTime),
+              RoutineCountdown(
+                startTime: homeViewModel.selectedRoutine.startTime,
+              ),
               const SizedBox(height: 40),
               Center(
                 child: PrimaryButton(
                   text: "Jetzt starten",
                   onPressed: () {
-                    debugPrint("Jetzt starten wurde geklickt!");
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => ActiveRoutineView(
+                          routine: homeViewModel.selectedRoutine,
+                        ),
+                      ),
+                    );
                   },
                 ),
               ),
@@ -110,7 +119,6 @@ class _HomeViewState extends State<HomeView> {
                 style: Theme.of(context).textTheme.headlineMedium,
               ),
               const SizedBox(height: 16),
-
               StepsList(steps: homeViewModel.steps),
             ],
           ),
