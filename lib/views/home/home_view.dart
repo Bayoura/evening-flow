@@ -24,14 +24,30 @@ class _HomeViewState extends State<HomeView> {
   String formattedTime = "";
 
   final steps = const [
-    StepModel(title: 'Zähne putzen', status: StepStatus.completed),
     StepModel(
+      id: "1",
+      title: 'Zähne putzen',
+      duration: Duration.zero,
+      status: StepStatus.completed,
+    ),
+    StepModel(
+      id: "2",
       title: 'Lesen',
       duration: Duration(minutes: 20),
       status: StepStatus.active,
     ),
-    StepModel(title: 'Tagebuch schreiben', duration: Duration(minutes: 10)),
-    StepModel(title: 'Tee trinken', status: StepStatus.skipped),
+    StepModel(
+      id: "3",
+      title: 'Tagebuch schreiben',
+      duration: Duration(minutes: 10),
+      status: StepStatus.pending,
+    ),
+    StepModel(
+      id: "4",
+      title: 'Tee trinken',
+      duration: Duration(minutes: 15),
+      status: StepStatus.skipped,
+    ),
   ];
 
   @override
