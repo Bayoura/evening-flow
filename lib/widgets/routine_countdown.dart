@@ -3,7 +3,8 @@ import 'package:evening_flow/constants/text_styles.dart';
 import 'package:flutter/material.dart';
 
 class RoutineCountdown extends StatefulWidget {
-  final TimeOfDay startTime;
+  // Startzeit seit Mitternacht (z. B. 18:30 = Duration(hours: 18, minutes: 30))
+  final Duration startTime;
 
   const RoutineCountdown({super.key, required this.startTime});
 
@@ -27,23 +28,22 @@ class _RoutineCountdownState extends State<RoutineCountdown> {
 
   void _updateRemaining() {
     final now = TimeOfDay.now();
-    final nowMinutes = now.hour * 60 + now.minute;
-    final startMinutes = widget.startTime.hour * 60 + widget.startTime.minute;
+    final nowSinceMidnight = Duration(hours: now.hour, minutes: now.minute);
 
-    var diffMinutes = startMinutes - nowMinutes;
-    var diffSeconds = (diffMinutes * 60) - DateTime.now().second;
+    var diff = widget.startTime - nowSinceMidnight;
 
-    if (diffSeconds < 0) diffSeconds += 24 * 60 * 60; // nach Mitternacht
+    if (diff.isNegative) {
+      diff += const Duration(days: 1); // nach Mitternacht
+    }
 
     setState(() {
-      _remaining = Duration(seconds: diffSeconds);
+      _remaining = diff;
     });
   }
 
   String _formatDuration(Duration duration) {
     final hours = duration.inHours;
     final minutes = duration.inMinutes.remainder(60);
-    // final seconds = duration.inSeconds.remainder(60);
 
     if (hours > 0 && minutes > 0) {
       return "${hours}h ${minutes}m";
