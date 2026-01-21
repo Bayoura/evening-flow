@@ -1,4 +1,5 @@
-import 'package:evening_flow/models/step_model.dart';
+import 'package:evening_flow/models/routine_model.dart';
+import 'package:evening_flow/viewmodels/home_viewmodel.dart';
 import 'package:evening_flow/widgets/buttons.dart';
 import 'package:evening_flow/constants/colors.dart';
 import 'package:evening_flow/constants/text_styles.dart';
@@ -14,88 +15,17 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  final List<String> dropdownList = <String>[
-    "Beispielroutine 1",
-    "Beispielroutine 2",
-    "Beispielroutine 3",
-  ];
-  late String dropdownValue;
-  final startTime = const TimeOfDay(hour: 21, minute: 30);
-  String formattedTime = "";
-
-  final steps = const [
-    StepModel(
-      id: "1",
-      title: 'Zähne putzen',
-      duration: Duration.zero,
-      status: StepStatus.completed,
-    ),
-    StepModel(
-      id: "2",
-      title: 'Lesen',
-      duration: Duration(minutes: 20),
-      status: StepStatus.active,
-    ),
-    StepModel(
-      id: "3",
-      title: 'Tagebuch schreiben',
-      duration: Duration(minutes: 10),
-      status: StepStatus.pending,
-    ),
-    StepModel(
-      id: "4",
-      title: 'Tee trinken',
-      duration: Duration(minutes: 15),
-      status: StepStatus.skipped,
-    ),
-  ];
+  late HomeViewModel homeViewModel;
 
   @override
   void initState() {
     super.initState();
-    dropdownValue = dropdownList.first;
-    formattedTime =
-        "${startTime.hour < 10 ? "0${startTime.hour}" : startTime.hour}:${startTime.minute < 10 ? "0${startTime.minute}" : startTime.minute}";
+    homeViewModel = HomeViewModel();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Deine Abendroutine"),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const SizedBox(
-              height: 48,
-              width: 48,
-              child: Icon(
-                Icons.settings_outlined,
-                color: AppColors.textSecondary,
-              ),
-            ),
-          ),
-        ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        onTap: (value) {
-          debugPrint("You tapped $value");
-        },
-        items: [
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.home_outlined),
-            label: "Home".toUpperCase(),
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.checklist),
-            label: "Routinen".toUpperCase(),
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.emoji_emotions_outlined),
-            label: "Stimmung".toUpperCase(),
-          ),
-        ],
-      ),
       body: SizedBox(
         width: double.infinity,
         child: Padding(
@@ -108,8 +38,8 @@ class _HomeViewState extends State<HomeView> {
                 style: Theme.of(context).textTheme.bodySmall,
               ),
               const SizedBox(height: 8),
-              DropdownButtonFormField<String>(
-                initialValue: dropdownValue,
+              DropdownButtonFormField<RoutineModel>(
+                initialValue: homeViewModel.selectedRoutine,
                 style: AppTextStyles.buttonPrimary,
                 icon: const Padding(
                   padding: EdgeInsets.only(right: 24),
@@ -139,30 +69,32 @@ class _HomeViewState extends State<HomeView> {
                     ),
                   ),
                 ),
-                items: dropdownList
+                items: homeViewModel.routines
                     .map(
-                      (item) => DropdownMenuItem(
-                        value: item,
+                      (routine) => DropdownMenuItem(
+                        value: routine,
                         child: Row(
                           children: [
                             const Icon(Icons.coffee_outlined),
                             const SizedBox(width: 8),
-                            Text(item),
+                            Text(routine.title),
                           ],
                         ),
                       ),
                     )
                     .toList(),
-                onChanged: (value) {
-                  setState(() {
-                    dropdownValue = value!;
-                  });
+                onChanged: (routine) {
+                  if (routine != null) {
+                    setState(() {
+                      homeViewModel.selectRoutine(routine);
+                    });
+                  }
                 },
               ),
               const SizedBox(height: 24),
-              Text("Beginn heute um $formattedTime Uhr"),
+              Text(homeViewModel.startTimeLabel),
               const SizedBox(height: 8),
-              RoutineCountdown(startTime: startTime),
+              RoutineCountdown(startTime: homeViewModel.selectedRoutine.startTime),
               const SizedBox(height: 40),
               Center(
                 child: PrimaryButton(
@@ -179,7 +111,7 @@ class _HomeViewState extends State<HomeView> {
               ),
               const SizedBox(height: 16),
 
-              StepsList(steps: steps),
+              StepsList(steps: homeViewModel.steps),
             ],
           ),
         ),
