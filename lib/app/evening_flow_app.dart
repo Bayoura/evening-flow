@@ -1,5 +1,5 @@
+import 'package:evening_flow/app/main_scaffold.dart';
 import 'package:evening_flow/theme/app_theme.dart';
-import 'package:evening_flow/views/home/home_view.dart';
 import 'package:flutter/material.dart';
 
 class EveningFlowApp extends StatelessWidget {
@@ -11,7 +11,7 @@ class EveningFlowApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Evening Flow',
       theme: AppTheme.standardTheme,
-      home: const HomeView(),
+      home: const MainScaffold(),
     );
   }
 }
