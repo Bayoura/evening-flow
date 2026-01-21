@@ -24,9 +24,9 @@ class StepItem extends StatelessWidget {
           Text(
             stepModel.status == StepStatus.skipped
                 ? "(übersprungen)"
-                : stepModel.duration == null
+                : stepModel.duration == Duration.zero
                 ? ""
-                : _formatDuration(stepModel.duration!),
+                : _formatDuration(stepModel.duration),
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
               color: Theme.of(context).colorScheme.onSurfaceVariant,
             ),
