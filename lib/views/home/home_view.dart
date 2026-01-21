@@ -1,17 +1,19 @@
-import 'package:evening_flow/buttons.dart';
+import 'package:evening_flow/models/step_model.dart';
+import 'package:evening_flow/widgets/buttons.dart';
 import 'package:evening_flow/constants/colors.dart';
 import 'package:evening_flow/constants/text_styles.dart';
 import 'package:evening_flow/widgets/routine_countdown.dart';
+import 'package:evening_flow/widgets/steps/steps_list.dart';
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class HomeView extends StatefulWidget {
+  const HomeView({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<HomeView> createState() => _HomeViewState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeViewState extends State<HomeView> {
   final List<String> dropdownList = <String>[
     "Beispielroutine 1",
     "Beispielroutine 2",
@@ -20,6 +22,17 @@ class _HomeScreenState extends State<HomeScreen> {
   late String dropdownValue;
   final startTime = const TimeOfDay(hour: 21, minute: 30);
   String formattedTime = "";
+
+  final steps = const [
+    StepModel(title: 'Zähne putzen', status: StepStatus.completed),
+    StepModel(
+      title: 'Lesen',
+      duration: Duration(minutes: 20),
+      status: StepStatus.active,
+    ),
+    StepModel(title: 'Tagebuch schreiben', duration: Duration(minutes: 10)),
+    StepModel(title: 'Tee trinken', status: StepStatus.skipped),
+  ];
 
   @override
   void initState() {
@@ -112,8 +125,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 items: dropdownList
                     .map(
-                      (item) =>
-                          DropdownMenuItem(value: item, child: Text(item)),
+                      (item) => DropdownMenuItem(
+                        value: item,
+                        child: Row(
+                          children: [
+                            const Icon(Icons.coffee_outlined),
+                            const SizedBox(width: 8),
+                            Text(item),
+                          ],
+                        ),
+                      ),
                     )
                     .toList(),
                 onChanged: (value) {
@@ -135,11 +156,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
                 ),
               ),
-              const SizedBox(height: 80),
+              const SizedBox(height: 100),
               Text(
                 "Schritte heute:",
-                style: Theme.of(context).textTheme.headlineSmall,
+                style: Theme.of(context).textTheme.headlineMedium,
               ),
+              const SizedBox(height: 16),
+
+              StepsList(steps: steps),
             ],
           ),
         ),
