@@ -8,24 +8,54 @@ class HomeViewModel extends ChangeNotifier {
   final List<RoutineModel> _routines = exampleEveningRoutines;
 
   late RoutineModel _selectedRoutine;
+  bool _completedToday = false;
 
   HomeViewModel() {
     _selectedRoutine = _routines.first;
   }
-  RoutineModel get selectedRoutine => _selectedRoutine;
 
-  void selectRoutine(RoutineModel routine) {
-    _selectedRoutine = routine;
-    notifyListeners();
-  }
+  // getter ---------------------------------
 
   List<RoutineModel> get routines => _routines;
+
+  RoutineModel get selectedRoutine => _selectedRoutine;
+
   List<StepModel> get steps => _selectedRoutine.steps;
 
   RoutineIconKey get iconKey => _selectedRoutine.iconKey;
 
+  bool get completedToday => _completedToday;
+
   String get startTimeLabel {
     return _formatTime(_selectedRoutine.startTime);
+  }
+
+  List<RoutineModel> get sortedRoutines {
+    final list = List<RoutineModel>.from(routines);
+
+    list.remove(selectedRoutine);
+    list.insert(0, selectedRoutine); // selectedRoutine is always first
+
+    return list;
+  }
+
+  // functions ---------------------------------
+
+  void selectRoutine(RoutineModel routine) {
+    if (routine.id == _selectedRoutine.id) return;
+    _selectedRoutine = routine;
+    _completedToday = false;
+    notifyListeners();
+  }
+
+  void markRoutineCompleted() {
+    _completedToday = true;
+    notifyListeners();
+  }
+
+  void resetForNewDay() {
+    _completedToday = false;
+    notifyListeners();
   }
 
   String _formatTime(Duration sinceMidnight) {
