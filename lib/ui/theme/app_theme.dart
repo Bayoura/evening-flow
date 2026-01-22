@@ -1,7 +1,7 @@
 import 'package:evening_flow/constants/colors.dart';
 import 'package:evening_flow/constants/text_styles.dart';
-import 'package:evening_flow/theme/app_color_scheme.dart';
-import 'package:evening_flow/theme/app_text_theme.dart';
+import 'package:evening_flow/ui/theme/app_color_scheme.dart';
+import 'package:evening_flow/ui/theme/app_text_theme.dart';
 import 'package:flutter/material.dart';
 
 class AppTheme {
