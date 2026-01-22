@@ -1,5 +1,5 @@
 import 'package:evening_flow/app/main_scaffold.dart';
-import 'package:evening_flow/theme/app_theme.dart';
+import 'package:evening_flow/ui/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
 class EveningFlowApp extends StatelessWidget {
