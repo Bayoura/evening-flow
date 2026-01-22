@@ -1,5 +1,6 @@
 import 'package:evening_flow/models/routine_model.dart';
 import 'package:evening_flow/models/step_model.dart';
+import 'package:evening_flow/ui/icons/routine_icons.dart';
 
 final List<RoutineModel> exampleEveningRoutines = [
   const RoutineModel(
@@ -7,6 +8,7 @@ final List<RoutineModel> exampleEveningRoutines = [
     title: "Entspannter Abend",
     startTime: Duration(hours: 20, minutes: 0),
     status: RoutineStatus.inactive,
+    iconKey: RoutineIconKey.coffee,
     steps: [
       StepModel(
         id: "step1",
@@ -44,6 +46,7 @@ final List<RoutineModel> exampleEveningRoutines = [
     title: "Tagesrückblick",
     startTime: Duration(hours: 21, minutes: 0),
     status: RoutineStatus.inactive,
+    iconKey: RoutineIconKey.journal,
     steps: [
       StepModel(
         id: "step1",
@@ -74,6 +77,7 @@ final List<RoutineModel> exampleEveningRoutines = [
     title: "Morgen vorbereiten",
     startTime: Duration(hours: 21, minutes: 30),
     status: RoutineStatus.inactive,
+    iconKey: RoutineIconKey.relax,
     steps: [
       StepModel(
         id: "step1",
@@ -102,6 +106,7 @@ final List<RoutineModel> exampleEveningRoutines = [
     title: "Früh ins Bett",
     startTime: Duration(hours: 22, minutes: 0),
     status: RoutineStatus.inactive,
+    iconKey: RoutineIconKey.sleep,
     steps: [
       StepModel(
         id: "step1",

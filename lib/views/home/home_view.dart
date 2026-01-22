@@ -1,10 +1,11 @@
 import 'package:evening_flow/models/routine_model.dart';
+import 'package:evening_flow/ui/icons/routine_icons.dart';
 import 'package:evening_flow/viewmodels/home_viewmodel.dart';
 import 'package:evening_flow/views/active_routine/active_routine_view.dart';
 import 'package:evening_flow/widgets/buttons.dart';
 import 'package:evening_flow/constants/colors.dart';
 import 'package:evening_flow/constants/text_styles.dart';
-import 'package:evening_flow/widgets/routine_countdown.dart';
+import 'package:evening_flow/widgets/routines/routine_countdown.dart';
 import 'package:evening_flow/widgets/steps/steps_list.dart';
 import 'package:flutter/material.dart';
 
@@ -76,7 +77,7 @@ class _HomeViewState extends State<HomeView> {
                         value: routine,
                         child: Row(
                           children: [
-                            const Icon(Icons.coffee_outlined),
+                            Icon(getRoutineIcon(routine.iconKey)),
                             const SizedBox(width: 8),
                             Text(routine.title),
                           ],

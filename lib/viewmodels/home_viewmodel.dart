@@ -1,6 +1,7 @@
 import 'package:evening_flow/data/mock/example_routines.dart';
 import 'package:evening_flow/models/routine_model.dart';
 import 'package:evening_flow/models/step_model.dart';
+import 'package:evening_flow/ui/icons/routine_icons.dart';
 import 'package:flutter/material.dart';
 
 class HomeViewModel extends ChangeNotifier {
@@ -20,6 +21,8 @@ class HomeViewModel extends ChangeNotifier {
 
   List<RoutineModel> get routines => _routines;
   List<StepModel> get steps => _selectedRoutine.steps;
+
+  RoutineIconKey get iconKey => _selectedRoutine.iconKey;
 
   String get startTimeLabel {
     return _formatTime(_selectedRoutine.startTime);
