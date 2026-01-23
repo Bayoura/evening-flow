@@ -94,6 +94,31 @@ class _HeaderRow extends StatelessWidget {
     required this.onDelete,
   });
 
+  void _confirmDelete(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text("Routine löschen"),
+        content: const Text("Möchtest du diese Routine wirklich löschen?"),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: const Text("Abbrechen"),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              onDelete();
+            },
+            child: const Text("Löschen"),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -110,7 +135,10 @@ class _HeaderRow extends StatelessWidget {
           ),
         ),
         IconButton(icon: const Icon(Icons.edit_outlined), onPressed: onEdit),
-        IconButton(icon: const Icon(Icons.delete_outline), onPressed: onDelete),
+        IconButton(
+          icon: const Icon(Icons.delete_outline),
+          onPressed: () => _confirmDelete(context),
+        ),
       ],
     );
   }
