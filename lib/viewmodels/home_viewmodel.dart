@@ -2,6 +2,7 @@ import 'package:evening_flow/data/mock/example_routines.dart';
 import 'package:evening_flow/models/routine_model.dart';
 import 'package:evening_flow/models/step_model.dart';
 import 'package:evening_flow/ui/icons/routine_icons.dart';
+import 'package:evening_flow/utils/formatters.dart';
 import 'package:flutter/material.dart';
 
 class HomeViewModel extends ChangeNotifier {
@@ -27,7 +28,8 @@ class HomeViewModel extends ChangeNotifier {
   bool get completedToday => _completedToday;
 
   String get startTimeLabel {
-    return _formatTime(_selectedRoutine.startTime);
+    final time = formatStartTime(_selectedRoutine.startTime);
+    return "Beginn heute um $time Uhr";
   }
 
   List<RoutineModel> get sortedRoutines {
@@ -56,15 +58,5 @@ class HomeViewModel extends ChangeNotifier {
   void resetForNewDay() {
     _completedToday = false;
     notifyListeners();
-  }
-
-  String _formatTime(Duration sinceMidnight) {
-    final hours = sinceMidnight.inHours;
-    final minutes = sinceMidnight.inMinutes % 60;
-
-    final hourString = hours.toString().padLeft(2, "0");
-    final minuteString = minutes.toString().padLeft(2, "0");
-
-    return "Beginn heute um $hourString:$minuteString Uhr";
   }
 }
