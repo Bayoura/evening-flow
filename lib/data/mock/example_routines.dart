@@ -7,7 +7,6 @@ final List<RoutineModel> exampleEveningRoutines = [
     id: "routine1",
     title: "Entspannter Abend",
     startTime: Duration(hours: 20, minutes: 0),
-    status: RoutineStatus.inactive,
     iconKey: RoutineIconKey.coffee,
     steps: [
       StepModel(
@@ -45,7 +44,6 @@ final List<RoutineModel> exampleEveningRoutines = [
     id: "routine2",
     title: "Tagesrückblick",
     startTime: Duration(hours: 21, minutes: 0),
-    status: RoutineStatus.inactive,
     iconKey: RoutineIconKey.journal,
     steps: [
       StepModel(
@@ -76,7 +74,6 @@ final List<RoutineModel> exampleEveningRoutines = [
     id: "routine3",
     title: "Morgen vorbereiten",
     startTime: Duration(hours: 21, minutes: 30),
-    status: RoutineStatus.inactive,
     iconKey: RoutineIconKey.relax,
     steps: [
       StepModel(
@@ -105,7 +102,6 @@ final List<RoutineModel> exampleEveningRoutines = [
     id: "routine4",
     title: "Früh ins Bett",
     startTime: Duration(hours: 22, minutes: 0),
-    status: RoutineStatus.inactive,
     iconKey: RoutineIconKey.sleep,
     steps: [
       StepModel(

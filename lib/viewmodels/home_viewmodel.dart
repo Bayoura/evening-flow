@@ -2,39 +2,61 @@ import 'package:evening_flow/data/mock/example_routines.dart';
 import 'package:evening_flow/models/routine_model.dart';
 import 'package:evening_flow/models/step_model.dart';
 import 'package:evening_flow/ui/icons/routine_icons.dart';
+import 'package:evening_flow/utils/formatters.dart';
 import 'package:flutter/material.dart';
 
 class HomeViewModel extends ChangeNotifier {
   final List<RoutineModel> _routines = exampleEveningRoutines;
 
   late RoutineModel _selectedRoutine;
+  bool _completedToday = false;
 
   HomeViewModel() {
     _selectedRoutine = _routines.first;
   }
-  RoutineModel get selectedRoutine => _selectedRoutine;
 
-  void selectRoutine(RoutineModel routine) {
-    _selectedRoutine = routine;
-    notifyListeners();
-  }
+  // getter ---------------------------------
 
   List<RoutineModel> get routines => _routines;
+
+  RoutineModel get selectedRoutine => _selectedRoutine;
+
   List<StepModel> get steps => _selectedRoutine.steps;
 
   RoutineIconKey get iconKey => _selectedRoutine.iconKey;
 
+  bool get completedToday => _completedToday;
+
   String get startTimeLabel {
-    return _formatTime(_selectedRoutine.startTime);
+    final time = formatStartTime(_selectedRoutine.startTime);
+    return "Beginn heute um $time Uhr";
   }
 
-  String _formatTime(Duration sinceMidnight) {
-    final hours = sinceMidnight.inHours;
-    final minutes = sinceMidnight.inMinutes % 60;
+  List<RoutineModel> get sortedRoutines {
+    final list = List<RoutineModel>.from(routines);
 
-    final hourString = hours.toString().padLeft(2, "0");
-    final minuteString = minutes.toString().padLeft(2, "0");
+    list.remove(selectedRoutine);
+    list.insert(0, selectedRoutine); // selectedRoutine is always first
 
-    return "Beginn heute um $hourString:$minuteString Uhr";
+    return list;
+  }
+
+  // functions ---------------------------------
+
+  void selectRoutine(RoutineModel routine) {
+    if (routine.id == _selectedRoutine.id) return;
+    _selectedRoutine = routine;
+    _completedToday = false;
+    notifyListeners();
+  }
+
+  void markRoutineCompleted() {
+    _completedToday = true;
+    notifyListeners();
+  }
+
+  void resetForNewDay() {
+    _completedToday = false;
+    notifyListeners();
   }
 }

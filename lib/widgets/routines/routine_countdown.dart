@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:evening_flow/constants/text_styles.dart';
+import 'package:evening_flow/utils/formatters.dart';
 import 'package:flutter/material.dart';
 
 class RoutineCountdown extends StatefulWidget {
@@ -35,25 +36,10 @@ class _RoutineCountdownState extends State<RoutineCountdown> {
     if (diff.isNegative) {
       diff += const Duration(days: 1); // nach Mitternacht
     }
-
+    if (!mounted) return;
     setState(() {
       _remaining = diff;
     });
-  }
-
-  String _formatDuration(Duration duration) {
-    final hours = duration.inHours;
-    final minutes = duration.inMinutes.remainder(60);
-
-    if (hours > 0 && minutes > 0) {
-      return "${hours}h ${minutes}m";
-    } else if (hours > 0) {
-      return "${hours}h";
-    } else if (minutes > 0) {
-      return "${minutes}m";
-    } else {
-      return "Jetzt";
-    }
   }
 
   @override
@@ -65,7 +51,7 @@ class _RoutineCountdownState extends State<RoutineCountdown> {
   @override
   Widget build(BuildContext context) {
     return Text(
-      "Noch ${_formatDuration(_remaining)}",
+      "Noch ${formatTimeUntilStart(_remaining)}",
       style: AppTextStyles.bodySmall,
     );
   }
