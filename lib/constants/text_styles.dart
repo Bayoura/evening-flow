@@ -77,10 +77,10 @@ class AppTextStyles {
 
   static const TextStyle buttonSecondary = TextStyle(
     fontFamily: _fontFamily,
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: FontWeight.w500,
-    height: 1.4,
-    letterSpacing: 0.14,
+    height: 1.6,
+    letterSpacing: 0.16,
   );
 
   //Detail
