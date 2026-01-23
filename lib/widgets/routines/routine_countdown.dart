@@ -35,7 +35,7 @@ class _RoutineCountdownState extends State<RoutineCountdown> {
     if (diff.isNegative) {
       diff += const Duration(days: 1); // nach Mitternacht
     }
-
+    if (!mounted) return;
     setState(() {
       _remaining = diff;
     });

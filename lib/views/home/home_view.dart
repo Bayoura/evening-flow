@@ -8,6 +8,7 @@ import 'package:evening_flow/constants/text_styles.dart';
 import 'package:evening_flow/widgets/routines/routine_countdown.dart';
 import 'package:evening_flow/widgets/steps/steps_list.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -17,16 +18,10 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  late HomeViewModel homeViewModel;
-
-  @override
-  void initState() {
-    super.initState();
-    homeViewModel = HomeViewModel();
-  }
-
   @override
   Widget build(BuildContext context) {
+    final homeViewModel = context.watch<HomeViewModel>();
+
     return Scaffold(
       body: SizedBox(
         width: double.infinity,
