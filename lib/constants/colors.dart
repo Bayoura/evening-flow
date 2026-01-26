@@ -10,7 +10,11 @@ class RawColors {
   static const Color softApricot = Color(0xFFFFD796);
   static const Color mutedGreen = Color(0xFF9FB8A7);
   static const Color mutedLavender = Color(0xFFB3AEC7);
-  static const Color mediumRed = Color(0xFFFF7171);
+  static const Color vibrantGreen = Color(0xFF9CFF88);
+  static const Color vibrantYellow = Color(0xFFFFC871);
+  static const Color vibrantBlue = Color(0xFF71F6FF);
+  static const Color vibrantRed = Color(0xFFFF7171);
+  static const Color vibrantPurple = Color(0xFF998EFF);
 }
 
 class AppColors {
@@ -28,9 +32,16 @@ class AppColors {
   static const Color textSecondary = RawColors.lavenderGrey;
   static const Color textOnAccent = RawColors.deepIndigo;
   static const Color textAccent = RawColors.softApricot;
-  static const Color textError = RawColors.mediumRed;
+  static const Color textError = RawColors.vibrantRed;
 
   //Status
   static const Color statusCompleted = RawColors.mutedGreen;
   static const Color statusSkipped = RawColors.mutedLavender;
+
+  //Mood
+  static const Color moodVeryGood = RawColors.vibrantGreen;
+  static const Color moodGood = RawColors.vibrantYellow;
+  static const Color moodNeutral = RawColors.vibrantBlue;
+  static const Color moodBad = RawColors.vibrantRed;
+  static const Color moodVeryBad = RawColors.vibrantPurple;
 }
