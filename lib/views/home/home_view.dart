@@ -22,102 +22,100 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     final homeViewModel = context.watch<HomeViewModel>();
 
-    return Scaffold(
-      body: SizedBox(
-        width: double.infinity,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Deine aktuelle Routine für heute:",
-                style: Theme.of(context).textTheme.bodySmall,
+    return SizedBox(
+      width: double.infinity,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Deine aktuelle Routine für heute:",
+              style: Theme.of(context).textTheme.bodySmall,
+            ),
+            const SizedBox(height: 8),
+            DropdownButtonFormField<RoutineModel>(
+              initialValue: homeViewModel.selectedRoutine,
+              style: AppTextStyles.buttonPrimary,
+              icon: const Padding(
+                padding: EdgeInsets.only(right: 24),
+                child: Icon(
+                  Icons.arrow_drop_down,
+                  color: AppColors.textPrimary,
+                ),
               ),
-              const SizedBox(height: 8),
-              DropdownButtonFormField<RoutineModel>(
-                initialValue: homeViewModel.selectedRoutine,
-                style: AppTextStyles.buttonPrimary,
-                icon: const Padding(
-                  padding: EdgeInsets.only(right: 24),
-                  child: Icon(
-                    Icons.arrow_drop_down,
-                    color: AppColors.textPrimary,
-                  ),
+              decoration: InputDecoration(
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: 24,
+                  vertical: 16,
                 ),
-                decoration: InputDecoration(
-                  contentPadding: const EdgeInsets.symmetric(
-                    horizontal: 24,
-                    vertical: 16,
-                  ),
 
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                    borderSide: const BorderSide(
-                      color: AppColors.surfaceSecondary,
-                      width: 2,
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                    borderSide: const BorderSide(
-                      color: AppColors.surfaceSecondary,
-                      width: 2,
-                    ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: const BorderSide(
+                    color: AppColors.surfaceSecondary,
+                    width: 2,
                   ),
                 ),
-                items: homeViewModel.routines
-                    .map(
-                      (routine) => DropdownMenuItem(
-                        value: routine,
-                        child: Row(
-                          children: [
-                            Icon(getRoutineIcon(routine.iconKey)),
-                            const SizedBox(width: 8),
-                            Text(routine.title),
-                          ],
-                        ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: const BorderSide(
+                    color: AppColors.surfaceSecondary,
+                    width: 2,
+                  ),
+                ),
+              ),
+              items: homeViewModel.routines
+                  .map(
+                    (routine) => DropdownMenuItem(
+                      value: routine,
+                      child: Row(
+                        children: [
+                          Icon(getRoutineIcon(routine.iconKey)),
+                          const SizedBox(width: 8),
+                          Text(routine.title),
+                        ],
                       ),
-                    )
-                    .toList(),
-                onChanged: (routine) {
-                  if (routine != null) {
-                    setState(() {
-                      homeViewModel.selectRoutine(routine);
-                    });
-                  }
+                    ),
+                  )
+                  .toList(),
+              onChanged: (routine) {
+                if (routine != null) {
+                  setState(() {
+                    homeViewModel.selectRoutine(routine);
+                  });
+                }
+              },
+            ),
+            const SizedBox(height: 24),
+            Text(homeViewModel.startTimeLabel),
+            const SizedBox(height: 8),
+            RoutineCountdown(
+              startTime: homeViewModel.selectedRoutine.startTime,
+            ),
+            const SizedBox(height: 40),
+            Center(
+              child: PrimaryButton(
+                text: "Jetzt starten",
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => ActiveRoutineView(
+                        routine: homeViewModel.selectedRoutine,
+                      ),
+                    ),
+                  );
                 },
               ),
-              const SizedBox(height: 24),
-              Text(homeViewModel.startTimeLabel),
-              const SizedBox(height: 8),
-              RoutineCountdown(
-                startTime: homeViewModel.selectedRoutine.startTime,
-              ),
-              const SizedBox(height: 40),
-              Center(
-                child: PrimaryButton(
-                  text: "Jetzt starten",
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => ActiveRoutineView(
-                          routine: homeViewModel.selectedRoutine,
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-              const SizedBox(height: 100),
-              Text(
-                "Schritte heute:",
-                style: Theme.of(context).textTheme.headlineMedium,
-              ),
-              const SizedBox(height: 16),
-              StepsList(steps: homeViewModel.steps),
-            ],
-          ),
+            ),
+            const SizedBox(height: 100),
+            Text(
+              "Schritte heute:",
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+            const SizedBox(height: 16),
+            StepsList(steps: homeViewModel.steps),
+          ],
         ),
       ),
     );

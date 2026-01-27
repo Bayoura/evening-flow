@@ -1,7 +1,9 @@
 import 'package:evening_flow/constants/colors.dart';
 import 'package:evening_flow/views/home/home_view.dart';
 import 'package:evening_flow/views/mood/mood_view.dart';
+import 'package:evening_flow/views/routines/create_routine_view.dart';
 import 'package:evening_flow/views/routines/routines_view.dart';
+import 'package:evening_flow/widgets/buttons.dart';
 import 'package:flutter/material.dart';
 
 class MainScaffold extends StatefulWidget {
@@ -73,6 +75,19 @@ class _MainScaffoldState extends State<MainScaffold> {
           ),
         ],
       ),
+      floatingActionButton: _currentIndex == 1
+          ? SecondaryButton(
+              text: "Neue Routine",
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const CreateRoutineView(),
+                  ),
+                );
+              },
+              leadingIcon: Icons.add,
+            )
+          : null,
     );
   }
 }
