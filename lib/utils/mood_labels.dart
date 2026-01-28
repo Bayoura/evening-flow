@@ -1,4 +1,4 @@
-import 'package:evening_flow/models/mood.dart';
+import 'package:evening_flow/models/mood/mood.dart';
 
 String moodLabel(Mood mood) {
   switch (mood) {

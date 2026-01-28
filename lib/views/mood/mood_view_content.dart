@@ -1,4 +1,4 @@
-import 'package:evening_flow/models/mood_view_mode.dart';
+import 'package:evening_flow/models/mood/mood_view_mode.dart';
 import 'package:evening_flow/viewmodels/mood_view_model.dart';
 import 'package:evening_flow/views/mood/mood_calendar_view.dart';
 import 'package:evening_flow/views/mood/mood_list_view.dart';

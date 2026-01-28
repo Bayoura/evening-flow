@@ -1,5 +1,5 @@
 import 'package:evening_flow/constants/colors.dart';
-import 'package:evening_flow/models/mood.dart';
+import 'package:evening_flow/models/mood/mood.dart';
 import 'package:evening_flow/ui/theme/mood_colors.dart';
 import 'package:evening_flow/utils/mood_labels.dart';
 import 'package:flutter/material.dart';

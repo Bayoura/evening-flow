@@ -1,5 +1,5 @@
 import 'package:evening_flow/constants/colors.dart';
-import 'package:evening_flow/models/mood.dart';
+import 'package:evening_flow/models/mood/mood.dart';
 import 'package:flutter/material.dart';
 
 Color moodColor(Mood mood) {
