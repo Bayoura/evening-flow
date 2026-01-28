@@ -1,5 +1,4 @@
 import 'package:evening_flow/constants/colors.dart';
-import 'package:evening_flow/models/mood/mood.dart';
 import 'package:evening_flow/ui/theme/mood_colors.dart';
 import 'package:evening_flow/viewmodels/mood_view_model.dart';
 import 'package:flutter/material.dart';
@@ -14,13 +13,6 @@ class Calendar extends StatefulWidget {
 }
 
 class _CalendarState extends State<Calendar> {
-  final Map<DateTime, Mood> _moodByDay = {
-    DateTime(2025, 12, 30): Mood.veryBad,
-    DateTime(2026, 01, 3): Mood.bad,
-    DateTime(2026, 01, 26): Mood.good,
-    DateTime(2026, 01, 27): Mood.veryGood,
-  };
-
   final CalendarFormat _calendarFormat = CalendarFormat.month;
   final kToday = DateTime.now();
 
@@ -39,7 +31,7 @@ class _CalendarState extends State<Calendar> {
       child: TableCalendar(
         firstDay: kFirstDay,
         lastDay: kLastDay,
-        focusedDay: moodViewModel.currentMonthAnchor,
+        focusedDay: moodViewModel.currentVisibleMonth,
         startingDayOfWeek: StartingDayOfWeek.monday,
         availableCalendarFormats: {_calendarFormat: ""},
         calendarFormat: _calendarFormat,
@@ -48,18 +40,13 @@ class _CalendarState extends State<Calendar> {
 
         //BADGES
         eventLoader: (day) {
-          // final mood = moodByDate[DateUtils.dateOnly(day)];
-          // if (mood == null) return [];
-          // return [mood.color]; // oder direkt Color
-          final normalized = DateTime(day.year, day.month, day.day);
-          return _moodByDay.containsKey(normalized) ? [1] : [];
+          return moodViewModel.entryForDay(day) != null ? [1] : [];
         },
         calendarBuilders: CalendarBuilders(
           markerBuilder: (context, day, events) {
-            final normalized = DateTime(day.year, day.month, day.day);
-            final mood = _moodByDay[normalized];
+            final entry = moodViewModel.entryForDay(day);
 
-            if (mood == null) return const SizedBox.shrink();
+            if (entry == null) return const SizedBox.shrink();
 
             return Positioned(
               top: 6,
@@ -68,7 +55,7 @@ class _CalendarState extends State<Calendar> {
                 width: 12,
                 height: 12,
                 decoration: BoxDecoration(
-                  color: moodColor(mood),
+                  color: moodColor(entry.mood),
                   shape: BoxShape.circle,
                 ),
               ),
@@ -100,9 +87,7 @@ class _CalendarState extends State<Calendar> {
           todayTextStyle: Theme.of(
             context,
           ).textTheme.bodyMedium!.copyWith(color: AppColors.textOnAccent),
-          outsideTextStyle: Theme.of(
-            context,
-          ).textTheme.bodyMedium!.copyWith(color: AppColors.textSecondary),
+          
           todayDecoration: const BoxDecoration(
             color: AppColors.textSecondary,
             shape: BoxShape.circle,
@@ -119,10 +104,10 @@ class _CalendarState extends State<Calendar> {
         // },
         onDaySelected: (selectedDay, focusedDay) {
           moodViewModel.selectDay(selectedDay);
-          moodViewModel.setMonthAnchor(selectedDay);
+          moodViewModel.setVisibleMonth(selectedDay);
         },
-        onPageChanged: (newAnchor) {
-          moodViewModel.setMonthAnchor(newAnchor);
+        onPageChanged: (newMonth) {
+          moodViewModel.setVisibleMonth(newMonth);
         },
       ),
     );
