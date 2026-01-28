@@ -1,5 +1,5 @@
-class AppIcons {
-  // Mood Icons
+class AppAssets {
+  // Mood Icons – Filled
   static const moodVeryBadFilled = "assets/icons/mood/filled/mood_very_bad.svg";
   static const moodBadFilled = "assets/icons/mood/filled/mood_bad.svg";
   static const moodNeutralFilled = "assets/icons/mood/filled/mood_neutral.svg";
@@ -7,6 +7,7 @@ class AppIcons {
   static const moodVeryGoodFilled =
       "assets/icons/mood/filled/mood_very_good.svg";
 
+  // Mood Icons – Outlined
   static const moodVeryBadOutlined =
       "assets/icons/mood/outlined/mood_very_bad.svg";
   static const moodBadOutlined = "assets/icons/mood/outlined/mood_bad.svg";
