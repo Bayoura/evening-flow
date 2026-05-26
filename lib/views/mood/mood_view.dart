@@ -1,15 +1,16 @@
+import 'package:evening_flow/viewmodels/mood_view_model.dart';
+import 'package:evening_flow/views/mood/mood_view_content.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class MoodView extends StatefulWidget {
+class MoodView extends StatelessWidget {
   const MoodView({super.key});
 
   @override
-  State<MoodView> createState() => _MoodViewState();
-}
-
-class _MoodViewState extends State<MoodView> {
-  @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return ChangeNotifierProvider(
+      create: (_) => MoodViewModel(),
+      child: const MoodViewContent(),
+    );
   }
 }

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "109997611114",
+    "project_id": "evening-flow",
+    "storage_bucket": "evening-flow.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:109997611114:android:32f483dee1682c9f5bd213",
+        "android_client_info": {
+          "package_name": "com.kristin.eveningflow"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMzFdq9i2PoZslpsHqr6G2E_ofpqtaUHM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
