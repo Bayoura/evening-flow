@@ -27,7 +27,7 @@ class _RoutinesViewState extends State<RoutinesView> {
             padding: const EdgeInsets.only(bottom: 16.0),
             child: RoutineCard(
               routine: routine,
-              isSelected: routine.id == homeViewModel.selectedRoutine.id,
+              isSelected: routine.id == homeViewModel.selectedRoutine?.id,
               onDelete: () {
                 debugPrint("DELETE");
               },

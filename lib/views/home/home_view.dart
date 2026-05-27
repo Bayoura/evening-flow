@@ -22,6 +22,16 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     final homeViewModel = context.watch<HomeViewModel>();
 
+    if (homeViewModel.isLoading) {
+      return const Center(child: CircularProgressIndicator());
+    }
+    if (!homeViewModel.hasRoutines) {
+      return const Center(
+        child: Text("Es sind noch keine Routinen vorhanden."),
+      );
+    }
+    final selectedRoutine = homeViewModel.selectedRoutine;
+
     return SizedBox(
       width: double.infinity,
       child: Padding(
@@ -35,7 +45,8 @@ class _HomeViewState extends State<HomeView> {
             ),
             const SizedBox(height: 8),
             DropdownButtonFormField<RoutineModel>(
-              initialValue: homeViewModel.selectedRoutine,
+              initialValue: selectedRoutine,
+              hint: const Text("Wähle eine Routine aus"),
               style: AppTextStyles.buttonPrimary,
               icon: const Padding(
                 padding: EdgeInsets.only(right: 24),
@@ -88,33 +99,32 @@ class _HomeViewState extends State<HomeView> {
               },
             ),
             const SizedBox(height: 24),
-            Text(homeViewModel.startTimeLabel),
-            const SizedBox(height: 8),
-            RoutineCountdown(
-              startTime: homeViewModel.selectedRoutine.startTime,
-            ),
-            const SizedBox(height: 40),
-            Center(
-              child: PrimaryButton(
-                text: "Jetzt starten",
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => ActiveRoutineView(
-                        routine: homeViewModel.selectedRoutine,
+            if (selectedRoutine != null) ...[
+              Text(homeViewModel.startTimeLabel),
+              const SizedBox(height: 8),
+              RoutineCountdown(startTime: selectedRoutine.startTime),
+              const SizedBox(height: 40),
+              Center(
+                child: PrimaryButton(
+                  text: "Jetzt starten",
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            ActiveRoutineView(routine: selectedRoutine),
                       ),
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
-            ),
-            const SizedBox(height: 100),
-            Text(
-              "Schritte heute:",
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-            const SizedBox(height: 16),
-            StepsList(steps: homeViewModel.steps),
+              const SizedBox(height: 100),
+              Text(
+                "Schritte heute:",
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
+              const SizedBox(height: 16),
+              StepsList(steps: homeViewModel.steps),
+            ],
           ],
         ),
       ),
