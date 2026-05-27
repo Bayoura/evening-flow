@@ -1,0 +1,4 @@
+enum MoodViewMode {
+  calendar,
+  list
+}

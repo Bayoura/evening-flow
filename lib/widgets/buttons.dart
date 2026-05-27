@@ -86,3 +86,53 @@ class SecondaryButton extends StatelessWidget {
     );
   }
 }
+
+class UtilityButton extends StatelessWidget {
+  final String text;
+  final VoidCallback onPressed;
+  final IconData? leadingIcon;
+  final IconData? actionIcon;
+  const UtilityButton({
+    super.key,
+    required this.text,
+    required this.onPressed,
+    this.leadingIcon,
+    this.actionIcon,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return OutlinedButton(
+      style: ElevatedButton.styleFrom(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        foregroundColor: AppColors.textPrimary,
+        backgroundColor: Colors.transparent,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(6),
+          side: BorderSide(
+            width: 2.0,
+            color: Theme.of(context).colorScheme.outline,
+          ),
+        ),
+      ),
+
+      onPressed: onPressed,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (leadingIcon != null)
+            Padding(
+              padding: const EdgeInsets.only(right: 8.0),
+              child: Icon(leadingIcon),
+            ),
+          Text(text, style: Theme.of(context).textTheme.labelMedium),
+          if (actionIcon != null)
+            Padding(
+              padding: const EdgeInsets.only(left: 8.0),
+              child: Icon(actionIcon),
+            ),
+        ],
+      ),
+    );
+  }
+}

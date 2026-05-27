@@ -4,7 +4,7 @@ import 'package:evening_flow/ui/icons/routine_icons.dart';
 
 final List<RoutineModel> exampleEveningRoutines = [
   const RoutineModel(
-    id: "routine1",
+    id: "1",
     title: "Entspannter Abend",
     startTime: Duration(hours: 20, minutes: 0),
     iconKey: RoutineIconKey.coffee,
@@ -41,7 +41,7 @@ final List<RoutineModel> exampleEveningRoutines = [
   ),
 
   const RoutineModel(
-    id: "routine2",
+    id: "2",
     title: "Tagesrückblick",
     startTime: Duration(hours: 21, minutes: 0),
     iconKey: RoutineIconKey.journal,
@@ -71,7 +71,7 @@ final List<RoutineModel> exampleEveningRoutines = [
   ),
 
   const RoutineModel(
-    id: "routine3",
+    id: "3",
     title: "Morgen vorbereiten",
     startTime: Duration(hours: 21, minutes: 30),
     iconKey: RoutineIconKey.relax,
@@ -99,7 +99,7 @@ final List<RoutineModel> exampleEveningRoutines = [
   ),
 
   const RoutineModel(
-    id: "routine4",
+    id: "4",
     title: "Früh ins Bett",
     startTime: Duration(hours: 22, minutes: 0),
     iconKey: RoutineIconKey.sleep,
