@@ -87,8 +87,8 @@ class AppTextStyles {
   static const TextStyle detail = TextStyle(
     fontFamily: _fontFamily,
     fontSize: 12,
-    fontWeight: FontWeight.w500,
+    fontWeight: FontWeight.w400,
     height: 1.33,
-    letterSpacing: 0.48,
+    letterSpacing: 0.8,
   );
 }
