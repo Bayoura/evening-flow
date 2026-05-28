@@ -90,4 +90,19 @@ class RoutineViewModel extends ChangeNotifier {
     _completedToday = false;
     notifyListeners();
   }
+
+  Future<void> addRoutine(RoutineModel routine) async {
+    await _routineRepository.addRoutine(routine);
+    await loadRoutines();
+  }
+
+  Future<void> updateRoutine(RoutineModel routine) async {
+    await _routineRepository.updateRoutine( routine);
+    await loadRoutines();
+  }
+
+  Future<void> deleteRoutine(String id) async {
+    await _routineRepository.deleteRoutine(id);
+    await loadRoutines();
+  }
 }

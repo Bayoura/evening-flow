@@ -12,4 +12,19 @@ class RoutineRepository {
       return RoutineModel.fromMap(doc.data(), doc.id);
     }).toList();
   }
+
+  Future<void> addRoutine(RoutineModel routine) async {
+    await _firestore.collection('routines').add(routine.toMap());
+  }
+
+  Future<void> updateRoutine(RoutineModel routine) async {
+    await _firestore
+        .collection('routines')
+        .doc(routine.id)
+        .update(routine.toMap());
+  }
+
+  Future<void> deleteRoutine(String id) async {
+    await _firestore.collection('routines').doc(id).delete();
+  }
 }
