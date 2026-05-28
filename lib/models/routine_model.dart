@@ -56,7 +56,7 @@ class RoutineModel {
             title: s['title'],
             description: s['description'],
             duration: Duration(minutes: s['duration']),
-            status: s['status'],
+            status: StepStatus.values.firstWhere((e) => e.name == s['status']),
           ),
         ),
       ),
