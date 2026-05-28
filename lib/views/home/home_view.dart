@@ -58,7 +58,7 @@ class _HomeViewState extends State<HomeView> {
               decoration: InputDecoration(
                 contentPadding: const EdgeInsets.symmetric(
                   horizontal: 24,
-                  vertical: 16,
+                  vertical: 20,
                 ),
 
                 enabledBorder: OutlineInputBorder(
@@ -117,7 +117,7 @@ class _HomeViewState extends State<HomeView> {
                   },
                 ),
               ),
-              const SizedBox(height: 100),
+              const SizedBox(height: 80),
               Text(
                 "Schritte heute:",
                 style: Theme.of(context).textTheme.headlineMedium,
