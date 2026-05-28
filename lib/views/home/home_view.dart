@@ -1,6 +1,6 @@
 import 'package:evening_flow/models/routine_model.dart';
 import 'package:evening_flow/ui/icons/routine_icons.dart';
-import 'package:evening_flow/viewmodels/home_viewmodel.dart';
+import 'package:evening_flow/viewmodels/routine_viewmodel.dart';
 import 'package:evening_flow/views/active_routine/active_routine_view.dart';
 import 'package:evening_flow/widgets/buttons.dart';
 import 'package:evening_flow/constants/colors.dart';
@@ -20,7 +20,17 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
-    final homeViewModel = context.watch<HomeViewModel>();
+    final routineViewModel = context.watch<RoutineViewModel>();
+
+    if (routineViewModel.isLoading) {
+      return const Center(child: CircularProgressIndicator());
+    }
+    if (!routineViewModel.hasRoutines) {
+      return const Center(
+        child: Text("Es sind noch keine Routinen vorhanden."),
+      );
+    }
+    final selectedRoutine = routineViewModel.selectedRoutine;
 
     return SizedBox(
       width: double.infinity,
@@ -35,7 +45,8 @@ class _HomeViewState extends State<HomeView> {
             ),
             const SizedBox(height: 8),
             DropdownButtonFormField<RoutineModel>(
-              initialValue: homeViewModel.selectedRoutine,
+              initialValue: selectedRoutine,
+              hint: const Text("Wähle eine Routine aus"),
               style: AppTextStyles.buttonPrimary,
               icon: const Padding(
                 padding: EdgeInsets.only(right: 24),
@@ -47,7 +58,7 @@ class _HomeViewState extends State<HomeView> {
               decoration: InputDecoration(
                 contentPadding: const EdgeInsets.symmetric(
                   horizontal: 24,
-                  vertical: 16,
+                  vertical: 20,
                 ),
 
                 enabledBorder: OutlineInputBorder(
@@ -65,7 +76,7 @@ class _HomeViewState extends State<HomeView> {
                   ),
                 ),
               ),
-              items: homeViewModel.routines
+              items: routineViewModel.routines
                   .map(
                     (routine) => DropdownMenuItem(
                       value: routine,
@@ -82,39 +93,38 @@ class _HomeViewState extends State<HomeView> {
               onChanged: (routine) {
                 if (routine != null) {
                   setState(() {
-                    homeViewModel.selectRoutine(routine);
+                    routineViewModel.selectRoutine(routine);
                   });
                 }
               },
             ),
             const SizedBox(height: 24),
-            Text(homeViewModel.startTimeLabel),
-            const SizedBox(height: 8),
-            RoutineCountdown(
-              startTime: homeViewModel.selectedRoutine.startTime,
-            ),
-            const SizedBox(height: 40),
-            Center(
-              child: PrimaryButton(
-                text: "Jetzt starten",
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => ActiveRoutineView(
-                        routine: homeViewModel.selectedRoutine,
+            if (selectedRoutine != null) ...[
+              Text(routineViewModel.startTimeLabel),
+              const SizedBox(height: 8),
+              RoutineCountdown(startTime: selectedRoutine.startTime),
+              const SizedBox(height: 40),
+              Center(
+                child: PrimaryButton(
+                  text: "Jetzt starten",
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            ActiveRoutineView(routine: selectedRoutine),
                       ),
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
-            ),
-            const SizedBox(height: 100),
-            Text(
-              "Schritte heute:",
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-            const SizedBox(height: 16),
-            StepsList(steps: homeViewModel.steps),
+              const SizedBox(height: 80),
+              Text(
+                "Schritte heute:",
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
+              const SizedBox(height: 16),
+              StepsList(steps: routineViewModel.steps),
+            ],
           ],
         ),
       ),
