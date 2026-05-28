@@ -1,6 +1,6 @@
 import 'package:evening_flow/models/routine_model.dart';
 import 'package:evening_flow/ui/icons/routine_icons.dart';
-import 'package:evening_flow/viewmodels/home_viewmodel.dart';
+import 'package:evening_flow/viewmodels/routine_viewmodel.dart';
 import 'package:evening_flow/views/active_routine/active_routine_view.dart';
 import 'package:evening_flow/widgets/buttons.dart';
 import 'package:evening_flow/constants/colors.dart';

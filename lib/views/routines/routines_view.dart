@@ -1,4 +1,4 @@
-import 'package:evening_flow/viewmodels/home_viewmodel.dart';
+import 'package:evening_flow/viewmodels/routine_viewmodel.dart';
 import 'package:evening_flow/views/routines/edit_routine_view.dart';
 import 'package:evening_flow/views/routines/widgets/routine_card.dart';
 import 'package:flutter/material.dart';
