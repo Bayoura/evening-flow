@@ -20,17 +20,17 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
-    final homeViewModel = context.watch<HomeViewModel>();
+    final routineViewModel = context.watch<RoutineViewModel>();
 
-    if (homeViewModel.isLoading) {
+    if (routineViewModel.isLoading) {
       return const Center(child: CircularProgressIndicator());
     }
-    if (!homeViewModel.hasRoutines) {
+    if (!routineViewModel.hasRoutines) {
       return const Center(
         child: Text("Es sind noch keine Routinen vorhanden."),
       );
     }
-    final selectedRoutine = homeViewModel.selectedRoutine;
+    final selectedRoutine = routineViewModel.selectedRoutine;
 
     return SizedBox(
       width: double.infinity,
@@ -76,7 +76,7 @@ class _HomeViewState extends State<HomeView> {
                   ),
                 ),
               ),
-              items: homeViewModel.routines
+              items: routineViewModel.routines
                   .map(
                     (routine) => DropdownMenuItem(
                       value: routine,
@@ -93,14 +93,14 @@ class _HomeViewState extends State<HomeView> {
               onChanged: (routine) {
                 if (routine != null) {
                   setState(() {
-                    homeViewModel.selectRoutine(routine);
+                    routineViewModel.selectRoutine(routine);
                   });
                 }
               },
             ),
             const SizedBox(height: 24),
             if (selectedRoutine != null) ...[
-              Text(homeViewModel.startTimeLabel),
+              Text(routineViewModel.startTimeLabel),
               const SizedBox(height: 8),
               RoutineCountdown(startTime: selectedRoutine.startTime),
               const SizedBox(height: 40),
@@ -123,7 +123,7 @@ class _HomeViewState extends State<HomeView> {
                 style: Theme.of(context).textTheme.headlineMedium,
               ),
               const SizedBox(height: 16),
-              StepsList(steps: homeViewModel.steps),
+              StepsList(steps: routineViewModel.steps),
             ],
           ],
         ),

@@ -5,7 +5,7 @@ import 'package:evening_flow/ui/icons/routine_icons.dart';
 import 'package:evening_flow/utils/formatters.dart';
 import 'package:flutter/material.dart';
 
-class HomeViewModel extends ChangeNotifier {
+class RoutineViewModel extends ChangeNotifier {
   // 1. Dependencies
   final RoutineRepository _routineRepository;
 
@@ -16,7 +16,7 @@ class HomeViewModel extends ChangeNotifier {
   bool _completedToday = false;
 
   // 3. Constructor
-  HomeViewModel(this._routineRepository) {
+  RoutineViewModel(this._routineRepository) {
     loadRoutines();
   }
 
@@ -37,11 +37,13 @@ class HomeViewModel extends ChangeNotifier {
   bool get completedToday => _completedToday;
 
   String get startTimeLabel {
-     if (_selectedRoutine?.startTime == null) {return ""; } 
-     else {
-    final time = formatStartTime(_selectedRoutine!.startTime);
-    return "Beginn heute um $time Uhr";
-  }}
+    if (_selectedRoutine?.startTime == null) {
+      return "";
+    } else {
+      final time = formatStartTime(_selectedRoutine!.startTime);
+      return "Beginn heute um $time Uhr";
+    }
+  }
 
   List<RoutineModel> get sortedRoutines {
     if (_selectedRoutine == null) return _routines;

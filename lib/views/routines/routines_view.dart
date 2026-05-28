@@ -14,8 +14,8 @@ class RoutinesView extends StatefulWidget {
 class _RoutinesViewState extends State<RoutinesView> {
   @override
   Widget build(BuildContext context) {
-    final homeViewModel = context.watch<HomeViewModel>();
-    final routines = homeViewModel.sortedRoutines;
+    final routineViewModel = context.watch<RoutineViewModel>();
+    final routines = routineViewModel.sortedRoutines;
 
     return Padding(
       padding: const EdgeInsetsGeometry.all(16),
@@ -27,7 +27,7 @@ class _RoutinesViewState extends State<RoutinesView> {
             padding: const EdgeInsets.only(bottom: 16.0),
             child: RoutineCard(
               routine: routine,
-              isSelected: routine.id == homeViewModel.selectedRoutine?.id,
+              isSelected: routine.id == routineViewModel.selectedRoutine?.id,
               onDelete: () {
                 debugPrint("DELETE");
               },

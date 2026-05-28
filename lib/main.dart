@@ -14,7 +14,7 @@ void main() async {
   await initializeDateFormatting('de_DE');
   runApp(
     ChangeNotifierProvider(
-      create: (_) => HomeViewModel(RoutineRepository(FirebaseFirestore.instance)),
+      create: (_) => RoutineViewModel(RoutineRepository(FirebaseFirestore.instance)),
       child: const EveningFlowApp(),
     ),
   );
