@@ -1,13 +1,8 @@
 import 'package:evening_flow/data/mock/example_routines.dart';
-import 'package:evening_flow/models/routine_model.dart';
-import 'package:evening_flow/models/step_model.dart';
-import 'package:evening_flow/ui/icons/routine_icons.dart';
-import 'package:evening_flow/viewmodels/routine_viewmodel.dart';
 import 'package:evening_flow/views/routines/edit_routine_view.dart';
 import 'package:evening_flow/views/routines/widgets/routine_category_section.dart';
 import 'package:evening_flow/widgets/buttons.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class CreateRoutineView extends StatefulWidget {
   const CreateRoutineView({super.key});
@@ -19,8 +14,6 @@ class CreateRoutineView extends StatefulWidget {
 class _CreateRoutineViewState extends State<CreateRoutineView> {
   @override
   Widget build(BuildContext context) {
-    final routineViewModel = context.watch<RoutineViewModel>();
-
     return Scaffold(
       appBar: AppBar(
         title: Column(
