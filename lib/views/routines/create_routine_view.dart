@@ -1,4 +1,5 @@
 import 'package:evening_flow/data/mock/example_routines.dart';
+import 'package:evening_flow/viewmodels/routine_editor_viewmodel.dart';
 import 'package:evening_flow/views/routines/edit_routine_view.dart';
 import 'package:evening_flow/views/routines/widgets/routine_category_section.dart';
 import 'package:evening_flow/widgets/buttons.dart';
@@ -39,7 +40,7 @@ class _CreateRoutineViewState extends State<CreateRoutineView> {
                 onPressed: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => const EditRoutineView(),
+                      builder: (context) => const EditRoutineView(mode: RoutineEditMode.create),
                     ),
                   );
                 },
@@ -53,11 +54,9 @@ class _CreateRoutineViewState extends State<CreateRoutineView> {
                   title: "Entspannung",
                   routines: exampleEveningRoutines,
                   onRoutineTap: (routine) {
-                    print(routine);
-                    print(routine.title);
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => EditRoutineView(routine: routine),
+                        builder: (context) => EditRoutineView(mode: RoutineEditMode.create, routine: routine),
                       ),
                     );
                   },
@@ -67,11 +66,9 @@ class _CreateRoutineViewState extends State<CreateRoutineView> {
                   title: "Journaling",
                   routines: exampleEveningRoutines,
                   onRoutineTap: (routine) {
-                    print(routine);
-                    print(routine.title);
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => EditRoutineView(routine: routine),
+                        builder: (context) => EditRoutineView(mode: RoutineEditMode.create, routine: routine),
                       ),
                     );
                   },
@@ -81,11 +78,9 @@ class _CreateRoutineViewState extends State<CreateRoutineView> {
                   title: "Produktivität",
                   routines: exampleEveningRoutines,
                   onRoutineTap: (routine) {
-                    print(routine);
-                    print(routine.title);
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => EditRoutineView(routine: routine),
+                        builder: (context) => EditRoutineView(mode: RoutineEditMode.create, routine: routine),
                       ),
                     );
                   },
