@@ -1,48 +1,63 @@
 import 'package:evening_flow/data/repositories/routine_repository.dart';
 import 'package:evening_flow/models/routine_model.dart';
+import 'package:evening_flow/models/step_model.dart';
+import 'package:evening_flow/ui/icons/routine_icons.dart';
 import 'package:flutter/material.dart';
 
-enum RoutineEditMode { createEmpty, createFromTemplate, editExisting }
+enum RoutineEditMode { create, edit }
 
 class RoutineEditorViewModel extends ChangeNotifier {
   // 1. Dependencies
   final RoutineRepository _routineRepository;
-  late RoutineEditMode _mode;
 
   // 2. State
-  // RoutineModel? _originalRoutine; // nur bei editExisting;
-  late RoutineModel
-  _draftRoutine; // wird in allen Modi bearbeitet, bei createEmpty mit leeren Werten initialisiert
+  final RoutineEditMode _mode;
+  RoutineModel
+  _draftRoutine; // wird in allen Modi bearbeitet, bei einem Template wird ein RoutineModel mit leeren Werten initialisiert
+  bool _isLoading = false;
 
   // 3. Constructor
   RoutineEditorViewModel({
     required RoutineRepository repo,
     required RoutineEditMode mode,
-    RoutineModel? routine,
-    RoutineModel? template,
-  }) : _routineRepository = repo {
-    _mode = mode;
-
-    if (mode == RoutineEditMode.editExisting && routine != null) {
-      _draftRoutine = routine.copyWith();
-    }
-  }
+    required RoutineModel draftRoutine,
+  }) : _routineRepository = repo,
+       _mode = mode,
+       _draftRoutine = draftRoutine
+           .copyWith(); // defensive copy, damit die Originaldaten nicht direkt verändert werden
 
   // 4. Getters
+  bool get isLoading => _isLoading;
+  RoutineModel get draftRoutine => _draftRoutine;
+  String get title => _draftRoutine.title;
+  Duration get startTime => _draftRoutine.startTime;
+  List<StepModel> get steps => _draftRoutine.steps;
+  RoutineIconKey get selectedIcon => _draftRoutine.iconKey;
+  Duration? get reminderOffset => _draftRoutine.reminderOffset;
 
   // 5. Init / Load
 
   // 6. Actions
+  void updateIcon(RoutineIconKey icon) {
+    _draftRoutine = _draftRoutine.copyWith(iconKey: icon);
+
+    notifyListeners();
+  }
+
   Future<void> save() async {
+    _isLoading = true;
+    notifyListeners();
+
     switch (_mode) {
-      case RoutineEditMode.createEmpty:
-      case RoutineEditMode.createFromTemplate:
+      case RoutineEditMode.create:
         await _routineRepository.addRoutine(_draftRoutine);
         break;
 
-      case RoutineEditMode.editExisting:
+      case RoutineEditMode.edit:
         await _routineRepository.updateRoutine(_draftRoutine);
         break;
     }
+    _isLoading = false;
+    notifyListeners();
   }
 }
