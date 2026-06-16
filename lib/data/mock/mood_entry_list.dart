@@ -3,27 +3,27 @@ import 'package:evening_flow/models/mood/mood_entry.dart';
 
 final List<MoodEntry> allEntries = [
   MoodEntry(
-    date: DateTime(2026, 1, 25),
+    date: DateTime(2026, 6, 12),
     mood: Mood.veryGood,
     routineId: "1",
     routineTitle: "Routinen Titel",
     note: "",
   ),
   MoodEntry(
-    date: DateTime(2026, 1, 26),
+    date: DateTime(2026, 6, 4),
     mood: Mood.good,
     routineId: "1",
     routineTitle: "Routinen Titel",
   ),
   MoodEntry(
-    date: DateTime(2026, 2, 4),
+    date: DateTime(2026, 6, 3),
     mood: Mood.veryBad,
     routineId: "2",
     routineTitle: "Routinen Titel",
     note: "",
   ),
   MoodEntry(
-    date: DateTime(2026, 1, 5),
+    date: DateTime(2026, 6, 10),
     mood: Mood.bad,
     routineId: "3",
     routineTitle: "Routinen Titel",
@@ -31,7 +31,7 @@ final List<MoodEntry> allEntries = [
         "Heute war voll gut und ich war richtig entspannt hehe blalbalb blllalaal bla lbala? albala bla",
   ),
   MoodEntry(
-    date: DateTime(2026, 1, 12),
+    date: DateTime(2026, 5, 28),
     mood: Mood.veryGood,
     routineId: "2",
     routineTitle: "Routinen Titel",
@@ -39,7 +39,7 @@ final List<MoodEntry> allEntries = [
         "Heute war voll gut und ich war richtig entspannt hehe blalbalb blllalaal bla lbala? albala bla",
   ),
   MoodEntry(
-    date: DateTime(2026, 2, 2),
+    date: DateTime(2026, 5, 29),
     mood: Mood.veryBad,
     routineId: "1",
     routineTitle: "Routinen Titel",
@@ -47,7 +47,7 @@ final List<MoodEntry> allEntries = [
         "Heute war voll gut und ich war richtig entspannt hehe blalbalb blllalaal bla lbala? albala bla",
   ),
   MoodEntry(
-    date: DateTime(2026, 3, 4),
+    date: DateTime(2026, 5, 17),
     mood: Mood.good,
     routineId: "2",
     routineTitle: "Routinen Titel",
@@ -55,7 +55,7 @@ final List<MoodEntry> allEntries = [
         "Heute war voll gut und ich war richtig entspannt hehe blalbalb blllalaal bla lbala? albala bla",
   ),
   MoodEntry(
-    date: DateTime(2026, 2, 16),
+    date: DateTime(2026, 5, 16),
     mood: Mood.bad,
     routineId: "3",
     routineTitle: "Routinen Titel",
@@ -63,7 +63,7 @@ final List<MoodEntry> allEntries = [
         "Heute war voll gut und ich war richtig entspannt hehe blalbalb blllalaal bla lbala? albala bla",
   ),
   MoodEntry(
-    date: DateTime(2026, 3, 15),
+    date: DateTime(2026, 6, 13),
     mood: Mood.veryGood,
     routineId: "4",
     routineTitle: "Routinen Titel",
