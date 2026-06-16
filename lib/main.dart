@@ -12,9 +12,17 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await initializeDateFormatting('de_DE');
+   final repository = RoutineRepository(FirebaseFirestore.instance);
+
   runApp(
-    ChangeNotifierProvider(
-      create: (_) => RoutineViewModel(RoutineRepository(FirebaseFirestore.instance)),
+    MultiProvider(
+      providers: [
+        Provider<RoutineRepository>.value(value: repository),
+
+        ChangeNotifierProvider(
+          create: (_) => RoutineViewModel(repository),
+        ),
+      ],
       child: const EveningFlowApp(),
     ),
   );

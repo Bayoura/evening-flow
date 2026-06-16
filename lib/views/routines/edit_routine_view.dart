@@ -12,9 +12,10 @@ class EditRoutineView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final repo = context.read<RoutineRepository>();
     return  ChangeNotifierProvider(
       create: (_) => RoutineEditorViewModel(
-        repo: context.read<RoutineRepository>(),
+        repo: repo,
         mode: mode,
         draftRoutine: routine ?? RoutineModel.empty(),
       ),
