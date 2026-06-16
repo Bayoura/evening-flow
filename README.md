@@ -1,3 +1,6 @@
+> **UX design preview.** The following screens were designed as part of this project. The Flutter implementation is currently in progress.
+<img width="6000" height="1200" alt="Evening Flow UX preview" src="https://github.com/user-attachments/assets/caa92dbe-0efe-4946-b955-0ef65ade5882" />
+
 # Evening Flow
 
 A Flutter application for building a structured evening routine system. The project focuses on learning and implementing scalable Flutter architecture using MVVM principles, Firebase integration, and modular state management.
