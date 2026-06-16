@@ -1,3 +1,4 @@
+import 'package:evening_flow/viewmodels/routine_editor_viewmodel.dart';
 import 'package:evening_flow/viewmodels/routine_viewmodel.dart';
 import 'package:evening_flow/views/routines/edit_routine_view.dart';
 import 'package:evening_flow/views/routines/widgets/routine_card.dart';
@@ -34,7 +35,7 @@ class _RoutinesViewState extends State<RoutinesView> {
               onEdit: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => EditRoutineView(routine: routine),
+                    builder: (context) => EditRoutineView(mode: RoutineEditMode.edit, routine: routine),
                   ),
                 );
               },

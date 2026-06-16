@@ -69,6 +69,17 @@ class RoutineModel {
     );
   }
 
+  factory RoutineModel.empty() {
+    return const RoutineModel(
+      id: '',
+      title: '',
+      startTime: Duration(hours: 20),
+      steps: [],
+      iconKey: RoutineIconKey.relax,
+      reminderOffset: null,
+    );
+  }
+
   Duration get totalDuration =>
       steps.fold(Duration.zero, (sum, s) => sum + s.duration);
 }
