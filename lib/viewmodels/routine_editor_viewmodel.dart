@@ -40,7 +40,11 @@ class RoutineEditorViewModel extends ChangeNotifier {
   // 6. Actions
   void updateIcon(RoutineIconKey icon) {
     _draftRoutine = _draftRoutine.copyWith(iconKey: icon);
+    notifyListeners();
+  }
 
+  void updateStartTime(Duration newStartTime) {
+    _draftRoutine = _draftRoutine.copyWith(startTime: newStartTime);
     notifyListeners();
   }
 
