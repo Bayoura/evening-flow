@@ -13,10 +13,10 @@ class EditRoutineViewContent extends StatefulWidget {
 }
 
 class _EditRoutineViewContentState extends State<EditRoutineViewContent> {
-  late final RoutineEditorViewModel viewModel;
   final TextEditingController _titleController = TextEditingController();
 
   Future<void> _openIconPicker() async {
+    final vm = context.read<RoutineEditorViewModel>();
     final selectedIcon = await showModalBottomSheet<RoutineIconKey>(
       context: context,
       shape: const RoundedRectangleBorder(
@@ -24,19 +24,47 @@ class _EditRoutineViewContentState extends State<EditRoutineViewContent> {
       ),
       builder: (_) => const RoutineIconPicker(),
     );
+    if (mounted && selectedIcon != null && selectedIcon != vm.selectedIcon) {
+      context.read<RoutineEditorViewModel>().updateIcon(selectedIcon);
+    }
+  }
 
-    if (selectedIcon != null) {
-      viewModel.updateIcon(selectedIcon);
-      setState(() {}); // UI aktualisieren
+  Widget _hourFormatBuilder(BuildContext context, Widget? child) {
+    final mediaQueryData = MediaQuery.of(context);
+
+    return MediaQuery(
+      data: mediaQueryData.alwaysUse24HourFormat
+          ? mediaQueryData
+          : mediaQueryData.copyWith(alwaysUse24HourFormat: true),
+      child: child!,
+    );
+  }
+
+  Future<void> _openTimePicker() async {
+    final vm = context.read<RoutineEditorViewModel>();
+    final selectedTime = await showTimePicker(
+      context: context,
+      hourLabelText: "Stunde",
+      initialTime: TimeOfDay(
+        hour: vm.startTime.inHours,
+        minute: vm.startTime.inMinutes % 60,
+      ),
+      builder: _hourFormatBuilder,
+    );
+    if (mounted && selectedTime != null) {
+      final newStartTime = Duration(
+        hours: selectedTime.hour,
+        minutes: selectedTime.minute,
+      );
+      context.read<RoutineEditorViewModel>().updateStartTime(newStartTime);
     }
   }
 
   @override
   void initState() {
     super.initState();
-    viewModel = context.read<RoutineEditorViewModel>();
-
-    _titleController.text = viewModel.draftRoutine.title;
+    final vm = context.read<RoutineEditorViewModel>();
+    _titleController.text = vm.draftRoutine.title;
   }
 
   @override
@@ -47,6 +75,13 @@ class _EditRoutineViewContentState extends State<EditRoutineViewContent> {
 
   @override
   Widget build(BuildContext context) {
+    final viewModel = context.watch<RoutineEditorViewModel>();
+    final startTime = viewModel.startTime;
+    final String hours = startTime.inHours.toString().padLeft(2, '0');
+    final String minutes = (startTime.inMinutes % 60).toString().padLeft(
+      2,
+      '0',
+    );
     return Scaffold(
       appBar: AppBar(title: const Text("Routine bearbeiten")),
       body: Padding(
@@ -106,7 +141,7 @@ class _EditRoutineViewContentState extends State<EditRoutineViewContent> {
             Row(
               children: [
                 InkWell(
-                  onTap: () {},
+                  onTap: _openTimePicker,
                   child: Container(
                     width: 56,
                     height: 44,
@@ -117,7 +152,7 @@ class _EditRoutineViewContentState extends State<EditRoutineViewContent> {
                       ),
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: Center(child: Text("21")),
+                    child: Center(child: Text(hours)),
                   ),
                 ),
                 Container(
@@ -125,7 +160,7 @@ class _EditRoutineViewContentState extends State<EditRoutineViewContent> {
                   child: const Text(":", style: AppTextStyles.section),
                 ),
                 InkWell(
-                  onTap: () {},
+                  onTap: _openTimePicker,
                   child: Container(
                     width: 56,
                     height: 44,
@@ -136,7 +171,7 @@ class _EditRoutineViewContentState extends State<EditRoutineViewContent> {
                       ),
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: Center(child: Text("45")),
+                    child: Center(child: Text(minutes)),
                   ),
                 ),
               ],
