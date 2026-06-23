@@ -176,6 +176,74 @@ class _EditRoutineViewContentState extends State<EditRoutineViewContent> {
                 ),
               ],
             ),
+            SizedBox(
+              height: 36,
+              child: Divider(
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+              ),
+            ),
+            const Text("Schritte:", style: AppTextStyles.section),
+            // Schritte einfügen
+            SizedBox(
+              height: 36,
+              child: Divider(
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+              ),
+            ),
+            const Text("Erinnerung", style: AppTextStyles.section),
+            CheckboxListTile(
+              title: const Text("Ich möchte erinnert werden"),
+              value: true,
+              activeColor: Theme.of(context).colorScheme.secondary,
+              checkColor: Theme.of(context).colorScheme.onSecondary,
+              controlAffinity: ListTileControlAffinity.leading,
+              onChanged: (newValue) {},
+            ),
+            const SizedBox(height: 8,),
+             Row(
+              children: [
+                InkWell(
+                  onTap: (){
+                    // Open time picker for reminder time
+                  },
+                  child: Container(
+                    width: 56,
+                    height: 44,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Theme.of(context).colorScheme.outline,
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Center(child: Text(hours)),
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: const Text(":", style: AppTextStyles.section),
+                ),
+                InkWell(
+                  onTap: (){
+                    // Open time picker for reminder time
+                  },
+                  child: Container(
+                    width: 56,
+                    height: 44,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Theme.of(context).colorScheme.outline,
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Center(child: Text(minutes)),
+                  ),
+                ),
+                const SizedBox(width: 8),
+                const Text("vor Beginn der Routine"),
+              ],
+            ),
           ],
         ),
       ),
