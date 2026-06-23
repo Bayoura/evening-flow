@@ -48,6 +48,11 @@ class RoutineEditorViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+    void updateReminderOffset(Duration? newReminderOffset) {
+    _draftRoutine = _draftRoutine.copyWith(reminderOffset: newReminderOffset);
+    notifyListeners();
+  }
+
   Future<void> save() async {
     _isLoading = true;
     notifyListeners();

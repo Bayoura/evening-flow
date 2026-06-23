@@ -1,3 +1,4 @@
+import 'package:duration_picker/duration_picker.dart';
 import 'package:evening_flow/constants/text_styles.dart';
 import 'package:evening_flow/ui/icons/routine_icons.dart';
 import 'package:evening_flow/viewmodels/routine_editor_viewmodel.dart';
@@ -57,6 +58,24 @@ class _EditRoutineViewContentState extends State<EditRoutineViewContent> {
         minutes: selectedTime.minute,
       );
       context.read<RoutineEditorViewModel>().updateStartTime(newStartTime);
+    }
+  }
+
+    Future<void> _openDurationPicker() async {
+    final vm = context.read<RoutineEditorViewModel>();
+    final selectedDuration = await showDurationPicker(
+      context: context,
+      initialTime: Duration(
+        hours: vm.reminderOffset?.inHours ?? 0,
+        minutes: vm.reminderOffset?.inMinutes.remainder(60).toInt() ?? 0,
+      ),
+    );
+    if (mounted && selectedDuration != null) {
+      final newReminderOffset = Duration(
+        hours: selectedDuration.inHours,
+        minutes: selectedDuration.inMinutes % 60,
+      );
+      context.read<RoutineEditorViewModel>().updateReminderOffset(newReminderOffset);
     }
   }
 
@@ -203,9 +222,7 @@ class _EditRoutineViewContentState extends State<EditRoutineViewContent> {
              Row(
               children: [
                 InkWell(
-                  onTap: (){
-                    // Open time picker for reminder time
-                  },
+                  onTap: _openDurationPicker,
                   child: Container(
                     width: 56,
                     height: 44,
@@ -216,7 +233,7 @@ class _EditRoutineViewContentState extends State<EditRoutineViewContent> {
                       ),
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: Center(child: Text(hours)),
+                    child: Center(child: Text("hh")),
                   ),
                 ),
                 Container(
@@ -224,9 +241,7 @@ class _EditRoutineViewContentState extends State<EditRoutineViewContent> {
                   child: const Text(":", style: AppTextStyles.section),
                 ),
                 InkWell(
-                  onTap: (){
-                    // Open time picker for reminder time
-                  },
+                  onTap: _openDurationPicker,
                   child: Container(
                     width: 56,
                     height: 44,
@@ -237,11 +252,12 @@ class _EditRoutineViewContentState extends State<EditRoutineViewContent> {
                       ),
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: Center(child: Text(minutes)),
+                    child: Center(child: Text("mm")),
                   ),
                 ),
                 const SizedBox(width: 8),
                 const Text("vor Beginn der Routine"),
+              
               ],
             ),
           ],
